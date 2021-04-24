@@ -10,11 +10,16 @@ function multiply(a, b) {
     return a * b;
 }
 
+function devide(a, b) {
+    return a / b;
+}
+
 // object for calling curresponding fucntion
 const calObject = {
     "+": add,
     "-": subtract,
-    "*": multiply
+    "x": multiply,
+    "÷": devide
 }
 
 // 
@@ -34,52 +39,86 @@ const operator = ["+", "-", "x", "÷"];
 
 
 btns.forEach(btn => {
-    btn.addEventListener("click", displayValue);
+    btn.addEventListener("click", () => {
+        clickFun(btn);
+    });
 });
 
 
-window.addEventListener("keydown", clickFucntion);
+window.addEventListener("keydown", keyPress);
 
-function clickFucntion(e) {
+function keyPress(e) {
     const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    clickFun(key);
 }
 
-function displayValue() {
-    let key = this.textContent.trim();
 
-    if (inserts.length == 4) {
-        inserts.push(+calScreenDown.textContent);
-        let result = operate(...inserts);
-        calScreenTop.textContent = inserts.join(" ");
-        calScreenDown.textContent = result;
 
-        inserts = [];
-    }
+// function to clear screen
+function clearScreen() {
+    calScreenTop.textContent = "";
+    calScreenDown.textContent = "0";
+    document.querySelector("#dot").style.pointerEvents = 'auto';
+}
 
-    // checking weather the user pressed an operator
-    else if (operator.indexOf(key) != -1) {
-        calScreenTop.textContent = calScreenDown.textContent;
-        calScreenDown.textContent = "";
-        // store tha value in varivble
-        inserts.push(+calScreenTop.textContent);
+// function to diplay on top
+function displayTop(key) {
+    calScreenTop.textContent = calScreenDown.textContent + " " + key;
+    calScreenDown.textContent = "";
+}
+
+// fucntion for delete
+function displayDelete() {
+    calScreenDown.textContent = calScreenDown.textContent.slice(0, -1);
+}
+
+
+function clickFun(btn) {
+    let key = btn.textContent.trim();
+    // when clinking an operator
+    if (operator.indexOf(key) != -1) {
+        displayTop(key);
+        inserts.push(+calScreenTop.textContent.slice(0, calScreenTop.textContent.indexOf(key)));
         inserts.push(key);
+        document.querySelector("#dot").style.pointerEvents = 'auto';
 
-        // } else if (key == "=") {
+    } else if (key == "clear") {
+        clearScreen()
+        inserts = [];
+    } else if (key == "delete") {
+        displayDelete();
+    } else if (key == "=") {
+        if (inserts.length == 2) {
+            inserts.push(+calScreenDown.textContent);
 
-        //     inserts.push(+calScreenDown.textContent);
-        //     let result = operate(...inserts);
-        //     calScreenTop.textContent = inserts.join(" ");
-        //     calScreenDown.textContent = result;
+            let result = operate(...inserts);
+            calScreenTop.textContent = inserts.slice(0, 3).join(" ");
+            calScreenDown.textContent = result;
 
-
-    } else {
+            inserts = [];
+        }
+    } else if (key == ".") {
+        btn.style.pointerEvents = 'none';
         // check weather screen is 0
         if (calScreenDown.textContent == 0) {
+            calScreenDown.textContent = 0 + key;
+        } else {
+            calScreenDown.textContent += key;
+        }
+    } else {
+        // check weather screen is 0
+        if (calScreenDown.textContent == 0 && !calScreenDown.textContent.includes(".")) {
             calScreenDown.textContent = key;
         } else {
             calScreenDown.textContent += key;
         }
     }
 
-    console.log(inserts);
+    if (inserts.length == 4) {
+        let result = operate(...inserts);
+        calScreenTop.textContent = inserts.slice(0, 3).join(" ");
+        calScreenDown.textContent = result;
+
+        inserts = [];
+    }
 }
