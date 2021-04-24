@@ -8,6 +8,8 @@
     <title>Calculator</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,71 +18,70 @@
         <div id="cal-body">
             <div id="cal-content">
                 <div id="cal-screen">
-                    <div id="display">
-                        <p></p>
+                    <div class="display" id="display-top">
                     </div>
-                    <div id="display">
-                        <p>0</p>
+                    <div class="display" id="display-down">
+                        0
                     </div>
                 </div>
                 <div id="cal-btns">
                     <div id="clear-delete">
-                        <div class="one-half-btn btn">
-                            claer
+                        <div data-key="8" class="one-half-btn btn">
+                            clear
                         </div>
-                        <div class="one-half-btn btn">
+                        <div data-key="46" class="one-half-btn btn">
                             delete
                         </div>
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="191" class="normal-btn btn">
                         ÷
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="55" class="normal-btn btn">
                         7
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="56" class="normal-btn btn">
                         8
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="57" class="normal-btn btn">
                         9
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="88" class="normal-btn btn">
                         x
                     </div>
 
-                    <div class="normal-btn btn">
+                    <div data-key="52" class="normal-btn btn">
                         4
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="53" class="normal-btn btn">
                         5
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="54" class="normal-btn btn">
                         6
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="189" class="normal-btn btn">
                         -
                     </div>
 
-                    <div class="normal-btn btn">
+                    <div data-key="49" class="normal-btn btn">
                         1
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="50" class="normal-btn btn">
                         2
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="51" class="normal-btn btn">
                         3
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="187" class="normal-btn btn">
                         +
                     </div>
 
-                    <div class="btn-twogrid btn">
+                    <div data-key="48" class="btn-twogrid btn">
                         0
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="190" class="normal-btn btn">
                         .
                     </div>
-                    <div class="normal-btn btn">
+                    <div data-key="187" class="normal-btn btn">
                         =
                     </div>
 
